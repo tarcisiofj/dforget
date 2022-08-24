@@ -43,4 +43,11 @@ class _HomeState extends State<Home> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+
+	void _showInsMem(){
+		Navigator.push(context,
+			MaterialPageRoute(builder: (context)=> )	
+		);
+	}
 }
