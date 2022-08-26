@@ -25,6 +25,8 @@ class MemoDAO{
 
 var	 class_memo = ${MemoFields.idCol}
 
+String 	varMemo = MemoFields.idCol;
+
 
 	static final MemoDAO _instance = MemoDAO.internal();
 	factory MemoDAO() => _instance;
@@ -64,18 +66,18 @@ var	 class_memo = ${MemoFields.idCol}
 
 	  return await	openDatabase(path, version:1, onCreate: (Database db, int newVersion) async {
 			await db.execute("CREATE TABLE $memoriesTable( " 
-						"$MemoDAO.idCol $INT_PK, " 
-						"$MemoDAO.titleMainCol $TEXT_,"
-						"$MemoDAO.subtitleCol $TEXT_,"
-						"$MemoDAO.themeCol $TEXT_," 
-						"$MemoDAO.rev1hCol $TEXT_,"
-						"$MemoDAO.rev24hCol $TEXT_," 
-						"$MemoDAO.rev1weekCol $TEXT_," 
-						"$MemoDAO.rev1monthCol $TEXT_," 
-						"$MemoDAO.revAllCol $TEXT_," 
-						"$MemoDAO.colorCol $TEXT_," 
-						"$MemoDAO.listPdfCol $TEXT_,"
-						"$MemoDAO.listImgCol $TEXT_"
+						"$MemoFields.idCol $INT_PK, " 
+						"$MemoFields.titleMainCol $TEXT_,"
+						"$MemoFields.subtitleCol $TEXT_,"
+						"$MemoFields.themeCol $TEXT_," 
+						"$MemoFields.rev1hCol $TEXT_,"
+						"$MemoFields.rev24hCol $TEXT_," 
+						"$MemoFields.rev1weekCol $TEXT_," 
+						"$MemoFields.rev1monthCol $TEXT_," 
+						"$MemoFields.revAllCol $TEXT_," 
+						"$MemoFields.colorCol $TEXT_," 
+						"$MemoFields.listPdfCol $TEXT_,"
+						"$MemoFields.listImgCol $TEXT_"
 						")"
 			);
 		});
