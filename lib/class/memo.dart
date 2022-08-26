@@ -1,5 +1,37 @@
-class Memo {
+const String memoriesTable = 'memories';
 
+ class MemoFields {
+		static final List<String> values = [
+			idCol,
+			titleMainCol,
+			subtitleCol,
+			themeCol,
+			rev1hCol,
+			rev24hCol,
+			rev1weekCol,
+			rev1monthCol,
+			revAllCol,
+			colorCol,
+			listPdfCol,
+			listImgCol
+		];
+
+		static const String idCol= "id";
+		static const String titleMainCol = "_titleMain";
+		static const String subtitleCol = "_subtitle";
+		static const String themeCol = "_theme";
+		static const String rev1hCol = "_rev1h";
+		static const String rev24hCol = "_rev24h";
+		static const String rev1weekCol = "_rev1week";
+		static const String rev1monthCol = "_rev1month";
+		static const String revAllCol = "_revAll";
+		static const String colorCol = "_color";
+		static const String listPdfCol = "_listPdf";
+		static const String listImgCol = "_listImg";
+	}
+
+
+class Memo{ 
 	int? id;
   String? _titleMain;
   String? _subtitle;
@@ -29,18 +61,18 @@ class Memo {
 
 
   Memo.fromMap(Map map){
-     this.id = map["id"];
-		 this._titleMain = map["_titleMain"];
-		 this._subtitle = map["_subtitle"];
-		 this._theme = map["_theme"];
-		 this._color = map["_color"];
-		 this._rev1h = map["_rev1h"];
-		 this._rev24h = map["_rev24h"];
-		 this._rev1month = map["_rev1month"];
-		 this._revAll = map["_revAll"];
-		 this._rev1week = map["_rev1week"];
-		 this._listPdf = map["_listPdf"];
-		 this._listImg = map["_listImg"];
+     this.id = map[MemoFields.idCol];
+		 this._titleMain = map[MemoFields.titleMainCol];
+		 this._subtitle = map[MemoFields.subtitleCol];
+		 this._theme = map[MemoFields.themeCol];
+		 this._color = map[MemoFields.colorCol];
+		 this._rev1h = map[MemoFields.rev1hCol];
+		 this._rev24h = map[MemoFields.rev24hCol];
+		 this._rev1month = map[MemoFields.rev1monthCol];
+		 this._revAll = map[MemoFields.revAllCol];
+		 this._rev1week = map[MemoFields.rev1weekCol];
+		 this._listPdf = map[MemoFields.listPdfCol];
+		 this._listImg = map[MemoFields.listImgCol];
 
   }
 
