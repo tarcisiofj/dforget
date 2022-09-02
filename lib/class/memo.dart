@@ -45,19 +45,20 @@ class Memo{
   List<String>? _listPdf;
   List<String>? _listImg;
 
-  Memo(
-		this._titleMain,
-    this._subtitle,
-    this._theme,
-    this._rev1h,
-    this._rev24h,
-    this._rev1week,
-    this._rev1month,
-    this._revAll,
-    this._color,
-    this._listImg,
-    this._listPdf
-  );
+	Memo();
+//  Memo(
+//		this._titleMain,
+//    this._subtitle,
+//    this._theme,
+//    this._rev1h,
+//    this._rev24h,
+//    this._rev1week,
+//    this._rev1month,
+//    this._revAll,
+//    this._color,
+//    this._listImg,
+//    this._listPdf
+//  );
 
 
   Memo.fromMap(Map map){

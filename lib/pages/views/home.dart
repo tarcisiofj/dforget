@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '/widgets/barra_principal.dart';
 import '/widgets/my_card.dart';
-
-
+import 'package:dforget/class/memo.dart';
+import 'package:dforget/pages/include/memo_page.dart';
+import 'package:dforget/class/memoDAO.dart';
 
 
 
@@ -19,12 +20,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _counter = 0;
 
+	List<Memo> memories = [];
+	MemoDAO memodao = MemoDAO();
 	List<String> toStudy  = ['Análise de Algoritmo', 'Programacao Linear', 'Álgebra Booleana'] ;
   
 	@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BarraPrincipal( tle:'Barra Principal'),
+      appBar: const BarraPrincipal( tle:'Barra Principal'),
       body: Center(
         child: Padding(
 					padding: const EdgeInsets.all(8.0),
@@ -45,9 +48,28 @@ class _HomeState extends State<Home> {
   }
 
 
-	void _showInsMem(){
-		Navigator.push(context,
-			MaterialPageRoute(builder: (context)=> )	
+	void _showMemoPage(Memo? memo) async{
+		final recMemoPage = await Navigator.push(
+				context,
+				MaterialPageRoute(
+						builder: (context)=> MemoPage(memo:memo))	
 		);
+		if(recMemoPage!=null){
+			if(memo!=null){
+//				await memodao.
+			} else {
+			
+			}	
+	//		getAllMemo();:
+		}
 	}
+
+	void getAllMemo(){
+		memodao.getMemo.then((list){
+			setState( () {
+				memories = list;
+			});
+		});
+	}//getAllMemo
+
 }
