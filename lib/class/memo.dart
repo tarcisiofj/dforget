@@ -17,33 +17,34 @@ const String memoriesTable = 'memories';
 		];
 
 		static const String idCol= "id";
-		static const String titleMainCol = "_titleMain";
-		static const String subtitleCol = "_subtitle";
-		static const String themeCol = "_theme";
-		static const String rev1hCol = "_rev1h";
-		static const String rev24hCol = "_rev24h";
-		static const String rev1weekCol = "_rev1week";
-		static const String rev1monthCol = "_rev1month";
-		static const String revAllCol = "_revAll";
-		static const String colorCol = "_color";
-		static const String listPdfCol = "_listPdf";
-		static const String listImgCol = "_listImg";
+		static const String titleMainCol = "titleMain";
+		static const String subtitleCol = "subtitle";
+		static const String themeCol = "theme";
+		static const String rev1hCol = "rev1h";
+		static const String rev24hCol = "rev24h";
+		static const String rev1weekCol = "rev1week";
+		static const String rev1monthCol = "rev1month";
+		static const String revAllCol = "revAll";
+		static const String colorCol = "color";
+		static const String listPdfCol = "listPdf";
+		static const String listImgCol = "listImg";
 	}
 
 
 class Memo{ 
 	int? id;
-  String? _titleMain;
-  String? _subtitle;
-  String? _theme;
-  String? _rev1h;
-  String? _rev24h;
-  String? _rev1week;
-  String? _rev1month;
-  String? _revAll;
-  String? _color;
-  List<String>? _listPdf;
-  List<String>? _listImg;
+  String? titleMain;
+  String? subtitle;
+  String? theme;
+	bool? statusView= true;
+  String? rev1h;
+  String? rev24h;
+  String? rev1week;
+  String? rev1month;
+  String? revAll;
+  int? color;
+  String? listPdf;
+  String? listImg;
 
 	Memo();
 //  Memo(
@@ -59,41 +60,54 @@ class Memo{
 //    this._listImg,
 //    this._listPdf
 //  );
+	
+	int getColor(){
+		return color!;
+	}	
+	
+	String? getTitleMain(){
+		return titleMain;
+	}
 
-
-  Memo.fromMap(Map map){
-     this.id = map[MemoFields.idCol];
-		 this._titleMain = map[MemoFields.titleMainCol];
-		 this._subtitle = map[MemoFields.subtitleCol];
-		 this._theme = map[MemoFields.themeCol];
-		 this._color = map[MemoFields.colorCol];
-		 this._rev1h = map[MemoFields.rev1hCol];
-		 this._rev24h = map[MemoFields.rev24hCol];
-		 this._rev1month = map[MemoFields.rev1monthCol];
-		 this._revAll = map[MemoFields.revAllCol];
-		 this._rev1week = map[MemoFields.rev1weekCol];
-		 this._listPdf = map[MemoFields.listPdfCol];
-		 this._listImg = map[MemoFields.listImgCol];
+//	bool hasImage(){
+//		List? lst;// = listImg.length;
+//		if(lst?.length > 0)
+//			return true;
+//		return false;
+//	}
+  
+	Memo.fromMap(Map map){
+     id = map[MemoFields.idCol];
+		 titleMain = map[MemoFields.titleMainCol];
+		 subtitle = map[MemoFields.subtitleCol];
+		 theme = map[MemoFields.themeCol];
+		 color = map[MemoFields.colorCol];
+		 rev1h = map[MemoFields.rev1hCol];
+		 rev24h = map[MemoFields.rev24hCol];
+		 rev1month = map[MemoFields.rev1monthCol];
+		 revAll = map[MemoFields.revAllCol];
+		 rev1week = map[MemoFields.rev1weekCol];
+		 listPdf = map[MemoFields.listPdfCol];
+		 listImg = map[MemoFields.listImgCol];
 
   }
 
-	Map toMap(){
-	 Map<dynamic,dynamic> map = {
-		  _titleMain: _titleMain, 
-	    _subtitle: this._subtitle,
-      _theme: this._theme,
-      _rev1h: this._rev1h,
-	    _rev24h: this._rev24h,
-      _rev1week: this._rev1month,
-      _rev1month: this._revAll,
-      _rev1week:this._rev1week,
-			_revAll: this._revAll,
-			_color: this._color,
-      _listPdf: this._listPdf,
-      _listImg: this._listImg,
+	Map<String,dynamic> toMap(){
+	 Map<String,dynamic> map = {
+		  MemoFields.titleMainCol: titleMain, 
+	    MemoFields.subtitleCol: subtitle,
+      MemoFields.themeCol: theme,
+      MemoFields.rev1hCol: rev1h,
+	    MemoFields.rev24hCol:rev24h,
+      MemoFields.rev1weekCol: rev1week,
+      MemoFields.rev1monthCol: rev1month,
+			MemoFields.revAllCol: revAll,
+			MemoFields.colorCol: color,
+      MemoFields.listPdfCol: listPdf,
+      MemoFields.listImgCol: listImg,
 	 };
 	 if(id!=null){
-	 	map[id] = id ;
+	 	map[MemoFields.idCol] = id ;
 	 }
 	 return map;
 
@@ -101,7 +115,7 @@ class Memo{
 
 	@override
   String toString(){
-			return "Memo(id:$id,_titleMain:$_titleMain)";
+			return "Memo(id:$id,titleMain:$titleMain)";
 	}
 
 }
