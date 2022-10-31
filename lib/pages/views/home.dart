@@ -3,8 +3,8 @@ import '/widgets/barra_principal.dart';
 import '/widgets/my_card.dart';
 import 'package:dforget/class/memo.dart';
 import 'package:dforget/pages/include/memo_page.dart';
-import 'package:dforget/class/memoDAO.dart';
-import 'package:dforget/class/memoDMO.dart';
+import 'package:dforget/class/memo_dao.dart';
+import 'package:dforget/class/memo_dmo.dart';
 
 
 
@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
 		);
 		if(recMemo!=null){
 			if(memo!=null){
-				await memodao.updateMemo(recMemo);
+				await memodmo.updateMemo(recMemo);
 			} else {
 				await  memodmo.save(recMemo);
 			}	
@@ -110,10 +110,9 @@ class _HomeState extends State<Home> {
 	}
 
 	void getAllMemo(){
-		memodao.getAllMemo().then((list)  {
+		memodmo.getAllMemo().then((list) {
 			setState( () {
 				memories = list;
-				
 			});
 		});
 	}//getAllMemo

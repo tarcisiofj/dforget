@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dforget/class/memo.dart';
-import 'package:dforget/class/memoDAO.dart';
-
+import 'package:dforget/class/memo_idao.dart';
+import 'package:dforget/class/memo_dao.dart';
 
 class MemoDMO{ 
 
@@ -9,7 +9,7 @@ class MemoDMO{
 	MemoDMO();
 
 	//Memo? memo;
-	MemoDAO memodao = MemoDAO();
+	MemoIDAO memodao = MemoDAO();
   
 	final String imgRev1 = "images/bar_rev_1_nm2.png";
 	final String imgRev2 = "images/bar_rev2_nm.png";
@@ -39,6 +39,22 @@ class MemoDMO{
 		}catch(e){
     	throw Exception('erro na gravacao: $e');
 		}
+	
+	}
+
+	
+	Future<int> updateMemo(Memo memo) async {
+
+		try {
+		  return memodao.updateMemo(memo);
+		} catch(e){
+			throw Exception('Erro na Atualização: $e');
+		}
+	}
+	
+	
+	Future<List<Memo>> getAllMemo() async {
+		return memodao.getAllMemo();
 	
 	}
 

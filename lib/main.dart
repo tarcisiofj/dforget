@@ -1,4 +1,3 @@
-import 'package:dforget/class/memoDAO.dart';
 import 'package:flutter/material.dart';
 import 'pages/views/home.dart';
 import 'package:dforget/pages/include/memo_page.dart';

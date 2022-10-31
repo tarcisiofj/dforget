@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:dforget/class/memo.dart';
+import 'package:dforget/class/memo_idao.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 
 
 
-class MemoDAO{
+class MemoDAO implements MemoIDAO{
 
 
 
@@ -77,16 +78,7 @@ class MemoDAO{
 
 	Future<Memo> saveMemo(Memo memo) async {
 		Database? dbMemo = await db;
-	//  DateTime today = DateTime.now();
-	//	int colorDefault =  Colors.blue.value;
-			
-	//	memo.rev24h = today.add(Duration(hours: 24)).toString(); 
-  //  memo.rev1h = 	today.add(Duration(hours:1)).toString(); 
-	//	memo.rev1week = today.add(Duration(days: 7)).toString();
-	//	memo.rev1month = today.add(Duration(days: 30)).toString();
-	//	memo.revAll = ((DateTime.parse(memo.rev1month!)).add(Duration(days:30))).toString();
-	//	memo.color = colorDefault;
-
+		
 		memo.id = await dbMemo?.insert(memoriesTable, memo.toMap());
 		print(memo.titleMain );
 		return memo;
