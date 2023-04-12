@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:dforget/class/memo.dart';
+import 'package:dforget/class/memo_dto.dart';
 
 class MemoPage extends StatefulWidget {
 
-	final Memo? memo;
+	final MemoDTO? memo;
 	const MemoPage({Key? key, this.memo}): super(key:key);
 
 
@@ -15,7 +15,7 @@ class MemoPage extends StatefulWidget {
 }
 
 class _MemoPageState extends State<MemoPage> {
-	Memo? _editedMemo;
+	MemoDTO? _editedMemo;
 	bool _memoEdited = false;
 
 	final _titleMainControler = TextEditingController();
@@ -28,11 +28,20 @@ class _MemoPageState extends State<MemoPage> {
 	void initState(){
 		super.initState();
 
-		if(widget.memo == null){
-			_editedMemo = Memo();
-		} else {
-			_editedMemo = Memo.fromMap(widget.memo!.toMap());
+			print('dendtro do initstate :');
+			print(widget.memo);
 
+		if(widget.memo == null){
+			_editedMemo = MemoDTO.empty();
+		} else {
+
+			print(widget.memo);
+			_editedMemo = MemoDTO.fromMap(widget.memo!.toMap());
+			_titleMainControler.text = _editedMemo?.getTitleMain ?? "";
+			_subtitleControler.text = _editedMemo?.getSubtitle ?? "";
+			_themeControler.text = _editedMemo?.getTheme ?? "";
+
+			
 
 		}
 	}
@@ -56,7 +65,7 @@ class _MemoPageState extends State<MemoPage> {
                 onChanged: (text) {
                   _memoEdited = true;
                   setState(() {
-                    _editedMemo!.titleMain= text;
+                    _editedMemo?.titleMain= text;
                   });
                 },
                 controller: _titleMainControler,

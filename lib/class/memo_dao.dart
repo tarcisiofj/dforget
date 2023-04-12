@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:dforget/class/memo.dart';
+//import 'package:dforget/class/memo.dart';
+import 'package:dforget/class/memo_dto.dart';
 import 'package:dforget/class/memo_idao.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:dforget/core/constants.dart';
 
 
 
@@ -14,7 +15,7 @@ class MemoDAO implements MemoIDAO{
 
 //var	 class_memo = ${MemoFields.idCol}
 
-	Memo 	memoFields  = Memo();
+//	MemoDTO 	memoFields  = MemoDTO.MemoFields();
 	List<String> lstMemoFields  = MemoFields.values;
 	
 	static final MemoDAO _instance = MemoDAO.internal();
@@ -49,7 +50,7 @@ class MemoDAO implements MemoIDAO{
 	Future<Database> initDb() async {
 
 		final databasesPath = await getDatabasesPath();
-		final path = join(databasesPath,"memories1.db");
+		final path = join(databasesPath,"memories1.1.db");
 
 		const idType = 'INTEGER PRIMARY KEY';
 		const textType = 'TEXT';// NOT NULL';
@@ -76,15 +77,19 @@ class MemoDAO implements MemoIDAO{
 	}
 
 
-	Future<Memo> saveMemo(Memo memo) async {
+	Future<MemoDTO> saveMemo(MemoDTO memo) async {
 		Database? dbMemo = await db;
-		
-		memo.id = await dbMemo?.insert(memoriesTable, memo.toMap());
-		print(memo.titleMain );
+//    try {
+    	memo.id = await dbMemo?.insert(memoriesTable, memo.toMap());
+  //  } catch (Exception ) {
+		//	print("=================================\n"+Exception.toString());
+		//	print("ERRO AO INSERIR MEMORIES");
+    //}		
+		print('salvando...'  );
 		return memo;
 	}
 
-	Future<Memo?> getMemo(int id) async {
+	Future<MemoDTO?> getMemo(int id) async {
 		Database? dbMemo = await db;
 		
 		List<Map> maps =await dbMemo!.query(memoriesTable,
@@ -92,33 +97,45 @@ class MemoDAO implements MemoIDAO{
 				where: "$MemoFields.idCol = ?",
 				whereArgs: [id]);
 		if(maps.isNotEmpty){
-			return Memo.fromMap(maps.first);
+			return MemoDTO.fromMap(maps.first);
 		} else {
 			throw Exception('ID $id não encontrado');
 		}
 
 	}
 
-	Future<int> updateMemo(Memo memo) async {
+	Future<int> updateMemo(MemoDTO memo) async {
 		Database? dbMemo = await db;
-
-		return await dbMemo!.update(memoriesTable, memo.toMap(), 
+		MemoDTO memodto = _getColorCard(memo);
+	  print(memodto);
+		return await dbMemo!.update(memoriesTable, memodto.toMap(), 
 				where: "${MemoFields.idCol}=?",
 				whereArgs: [memo.id],);
 	}
 
+	Future<int>	 deleteMemoAllReg() async {
+		Database? dbMemo = await db;
+
+		return await dbMemo!.delete(memoriesTable,where: null);
+		//return await dbMemo!.delete(memoriesTable,where: "${MemoFields.idCol}=?",whereArgs: [id]);
+	}
+	
 	Future<int>	 deleteMemo(int id) async {
 		Database? dbMemo = await db;
 
 		return await dbMemo!.delete(memoriesTable,where: "${MemoFields.idCol}=?",whereArgs: [id]);
 	}
 	
-	Future<List<Memo>> getAllMemo() async {
+	Future<List<MemoDTO>> getAllMemo() async {
+		
 		Database? dbMemo = await db;
 		List listMap = await dbMemo!.rawQuery("SELECT * FROM $memoriesTable");
-	  List<Memo> listMemo = [];
+	  List<MemoDTO> listMemo = [];
+		MemoDTO memo ;
+
 		for(Map m in listMap){
-			listMemo.add(Memo.fromMap(m));
+			memo = MemoDTO.fromMap(m);
+			listMemo.add(_getColorCard(memo) );
 		}
 		return listMemo;
 	}
@@ -126,6 +143,47 @@ class MemoDAO implements MemoIDAO{
 	Future close() async {
 		Database? dbMemo = await db;
 		dbMemo!.close();
+	}
+
+
+	MemoDTO _getColorCard(MemoDTO memo){
+		
+		final DateTime today = DateTime.now();
+		DateTime temp = today;
+
+		if(temp.isAfter(DateTime.parse(memo.rev1h!))){
+    		print('temp mair q rev1h');
+     		if(temp.isAfter(DateTime.parse(memo.rev24h!))){
+					print('temp maior rev24h');
+      		if(temp.isAfter(DateTime.parse(memo.rev1week!))){
+						print('temp mair revWeek');
+	        	if(temp.isAfter(DateTime.parse(memo.rev1month!))){
+          		print('temp maior revMonth');
+        		} else {  //if revMonth
+         			if(temp.compareTo(DateTime.parse(memo.rev1month!))==0)
+            		memo.color!=ConstRevise;							 	
+         			else
+            		memo.color!= ConstOk;
+        		} //else revMonth
+      		} else{ // if revWeek
+         		if(temp.compareTo(DateTime.parse(memo.rev1week!))==0)
+            	memo.color!=ConstRevise;
+						else
+            	memo.color!= ConstOk;
+        	}// else revWeek
+    	} else {  // if rev24
+      	if(temp.compareTo(DateTime.parse(memo.rev24h!))==0)
+        	memo.color!=ConstRevise;
+      	else
+          memo.color!= ConstOk;
+    	}// else rev24
+  	} else { // if rev1h
+    	if(temp.compareTo(DateTime.parse(memo.rev1h!))==0)
+      	memo.color!= ConstRevise;
+    	else
+      	memo.color!= ConstOk;
+  	} // else rev1h
+	return memo;
 	}
 
 }

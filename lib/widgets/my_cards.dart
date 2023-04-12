@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dforget/widgets/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:dforget/class/memo_dto.dart';
@@ -7,52 +9,37 @@ import 'package:path/path.dart';
 import 'package:dforget/pages/include/memo_page.dart';
 import 'package:dforget/widgets/nav.dart';
 
-class MyCard extends StatelessWidget {
+class MyCard extends StatefulWidget {
  	MyCard({
-    Key? key,
+    Kefinal y
   }) : super(key: key);
 
-	late String titulo;
-	MemoDTO? memo;
-	MemoDMO memodmo = MemoDMO();
-	late final VoidCallback  showMemoPage;
- 	MyCard.full(this.memo,this.showMemoPage);
+	final Void  getAllMemo;
+	MemoDTO? mem,this.getAllMemo o;
 
-  	@override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Card(
-      	child: SizedBox(
-      		height: 145.0,
-      		child: Row(
-      			crossAxisAlignment: CrossAxisAlignment.stretch,
-      			children: <Widget>[
-      					 Container(
-      							color: Color(memo?.getColor ?? 0) ,
-      							padding: const EdgeInsets.symmetric(horizontal: 5.0),
-      							// child: Text(                  "",style: new TextStyle(color: Colors.white),),
-      					 ),//container
-      					 Expanded(
-      						 child:	Column(
-      						   children: [
-      						     ListTile(
-      									 title: Text(
-													 memo?.titleMain ?? "",
-													 style:TextStyle(
-															 fontWeight: FontWeight.bold) ,),
+
+ 	MyCard.full(this.memo,BuildContext context);
+
+  @override
+  State<MyCard> createState() => _MyCardState();
+}
+
+class _MyCardState extends State<MyCard> {
+	late String titulo;
+
+				MemoDMO memodmo = MemoDMO();
+								child: Row(
+									children: <Widget>[
+														color: Color(widget.memo?.getColor ?? 0) ,
+											 ),//container
+												 child:	Column(
+														 ListTile(
+																 widget.memo?.titleMain ?? "",
+																	 style:TextStyle(
+														 fontWeight: FontWeight.bold) ,),
       									 subtitle: RichText(
       												text:  TextSpan( 
-      													style: TextStyle(color: Colors.black),
       							 				  		children: [
-      							 				    		TextSpan(text: memo?.subtitle ?? '',),
-      							 				    		TextSpan(text: '\nPróxima Revisão:',style: TextStyle(color: Colors.black87)),
-      												  		TextSpan(text: '03/04/2022',style: TextStyle(color: Colors.black54)),
-      											  		]
-      												)
-      									 ),// subtitle, Text('Próxima Revisão: 03/02/22 \n terceira linha ') ,
-      									 trailing: Column(children: [
-												 Icon(
-														 Icons.photo,
 														 color: Colors.blueAccent,
 														 semanticLabel:'Possui Imagens',
 														 ),// Icon photo
@@ -62,47 +49,43 @@ class MyCard extends StatelessWidget {
 											 ],), //Icon(Icons.circle_notifications),
 										//	 onTap: (){
 										//	 	print('Clicou');
-										//		_showMemoPage(context,memo!);
-										//	 },
-      									 //leading: Icon(Icons.circle,color: Colors.greenAccent),
-      									 //isThreeLine:true ,
-      								),//ListTile
+			//		_s owMemoPage(context,memo!);
+													//isThreeLine:true ,
 								 InkWell(
-  									splashColor: Colors.white10, // Splash color over image
-  									child: Ink.image(
-      										fit: BoxFit.cover, // Fixes border issues
-      										width: 300,
-      										height: 60,
-      										image: AssetImage(_imgProgress(memo!)),
-  									),//child
-								 ),//InkWell
-      						//Image.asset('images/bar_rev_1_nm2.png',width: 300, height:70,)
-      						//Image.asset(_imgProgress(),width: 300, height:70,)
-
-      						],//children 
+											//	print('Click na figura');
+									//}, // Image tapped
+														fit: BoxFit.cover, // Fixes border issues
+														height: 60,
+											),//child
+												//Image.asset('images/bar_rev_1_nm2.png',width: 300, height:70,)
+												//Image.asset(_imgProgress(),width: 300, height:70,)
+        						],//children 
       					),//Column
       					),//Expanded
-      				],
-      									),
        							),
 
       		), // Card
 					onTap: () async {
-						showMemoPage(memo);	
-					//	 MemoDTO recMemo  = await  push(context,MemoPage(memo:memo));
-					//	 if(recMemo!=null){
-					//		if(memo!=null){
-					//			await	 memodmo.updateMemo(recMemo);
-					//		} else {
-					//			await  memodmo.save(recMemo);
-					//		}	
-					//		getAllMemo();
-					//		} // if(recMemo)
-					}
+			 			emoDTO recMemo  = await  push(context,MemoPage(memo:widget.memo));
+						//Future  recMemo = Navigator.of(context).pushNamed('/MemoPage', arguments:{'memo':memo});
+
+						 if(recMemo!=null){
+							if(widget.memo!=null){
+								await memodmo.updateMemo(recMemo);
+							} else {
+								await  memodmo.save(recMemo);
+							}	
+							//_getAllMemo();
+							Future<List> l = memodmo.getAllMemo();
+							setState(() {
+								
+							});
+
+						} // if(recMemo)
+						}
     ); //GestureDetector
 	}
-
-	}
+}
 
 
 

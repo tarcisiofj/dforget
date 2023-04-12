@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '/widgets/barra_principal.dart';
 import '/widgets/my_card.dart';
-import 'package:dforget/class/memo.dart';
+import 'package:dforget/class/memo_dto.dart';
 import 'package:dforget/pages/include/memo_page.dart';
 import 'package:dforget/class/memo_dao.dart';
 import 'package:dforget/class/memo_dmo.dart';
+import 'package:dforget/widgets/nav.dart';
 
 
 
@@ -21,7 +22,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _counter = 0;
 
-	List<Memo> memories = [];
+	List<MemoDTO> memories = [];
 	MemoDAO memodao = MemoDAO();
 	MemoDMO memodmo = MemoDMO();
 //	List<String> toStudy  = ['Análise de Algoritmo', 'Programacao Linear', 'Álgebra Booleana'] ;
@@ -30,7 +31,8 @@ class _HomeState extends State<Home> {
 	void initState(){
 		super.initState();
 
-//		Memo m = Memo();
+//		MemoDTO m = MemoDTO(
+//				"", "", "", "", "", "",rev1h="", this.color="", listPdf, listImg,"");
 //		m.titleMain ='Algebra Linear';
 //		m.subtitle = 'variaveis ';
 //		m.theme = 'programacao';
@@ -45,26 +47,40 @@ class _HomeState extends State<Home> {
 //	
 //
 
-//		memodao.getAllMemo().then((list){
+//		memodao._getAllMemo().then((list){
 //			print('dentro do initState e imprimindo a lista de memories');
 //			print(list);
-//			Memo m = list[1];
-//			DateTime temp = DateTime.parse(m.rev1h!).add(Duration(days: 60));
-//			print(temp);
-//		  m.rev1h = temp.toString();
-//			print(m.rev1h);
-//			m.rev24h = temp.add(Duration(days:1)).toString();
-//			m.rev1week = temp.add(Duration(days:7)).toString();
-//			m.rev1month = temp.add(Duration(days:30)).toString();
-//			m.revAll = temp.add(Duration(days:120)).toString();
-//			m.subtitle = 'bd oracle';
-//		   memodao.updateMemo(m);
-//
-//
+ 			//memodao.deleteMemoAllReg();
+			//print('apagou todos registros');
+		//	List <String>listasPDF =<String>["um","dois"];
+		//	
+		//	MemoDTO m = MemoDTO.empty(); 
+		//	m.rev1h = DateTime.now().toString();
+		//	DateTime temp = DateTime.parse(m.rev1h!).add(Duration(days:30 ));
+		//	print(temp);
+		//  m.rev1h = temp.toString();
+		//	m.color= Colors.blue.value;
+		//	m.rev24h = temp.add(Duration(days:1)).toString();
+		//	m.rev1week = temp.add(Duration(days:7)).toString();
+		//	m.rev1month = temp.add(Duration(days:30)).toString();
+		//	m.revAll = temp.add(Duration(days:120)).toString();
+		//	m.subtitle = 'paradoxal';
+		//	m.titleMain = 'Filosofia viral';
+		//	m.theme = 'aqui é o conteúdo do texto a ser aprendido';
+		//	//m.listImg?.add("/imagens/img.jpg"); //= ["magensfoto1.jpg","imagensfoto2.jpg"];
+		//	m.listPdf = "arquivo.pdf,arquivo2.pdf";
+
+		//	
+		//	print("O objeto a ser salvo é: ");
+		//print(m);	
+			
+	    //memodao.updateMemo(m);
+		//	memodao.saveMemo(m);
+
 //		});
 		
-
-		getAllMemo();
+ 	//	memodao.deleteMemoAllReg();
+		_getAllMemo();
 	}
   
 	@override
@@ -77,14 +93,15 @@ class _HomeState extends State<Home> {
           child: ListView.builder(
            itemCount: memories.length,
 					 itemBuilder: (context, index){
-							return MyCard.full(memories[index]);
+							return  MyCard.full(memories[index],showMemoPage(memoDTO));
+					
 					 } , 
 					),
 				),
       ),
     floatingActionButton: FloatingActionButton(
         onPressed: (){
-					_showMemoPage();
+					showMemoPage();
 				},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
@@ -93,28 +110,25 @@ class _HomeState extends State<Home> {
   }
 
 
-	void _showMemoPage({Memo? memo}) async{
-		final recMemo = await Navigator.push(
-				context,
-				MaterialPageRoute(
-						builder: (context)=> MemoPage(memo:memo))	
-		);
-		if(recMemo!=null){
-			if(memo!=null){
-				await memodmo.updateMemo(recMemo);
-			} else {
-				await  memodmo.save(recMemo);
-			}	
-		getAllMemo();
-		}
-	}
+	void showMemoPage({MemoDTO? memo}) async{
+			MemoDTO recMemo = await push(context,MemoPage());
+		//Future  recMemo = Navigator.of(context).pushNamed('/MemoPage', arguments:{'memo':memo});
+			if(recMemo!=null){
+				if(memo!=null){
+					await memodmo.updateMemo(recMemo);
+				} else {
+					await  memodmo.save(recMemo);
+				}	
+				getAllMemo();
+			 } // if(recMemo)
+  }
 
 	void getAllMemo(){
-		memodmo.getAllMemo().then((list) {
+		memodmo.getAllMemo().then((list) { 
 			setState( () {
 				memories = list;
 			});
 		});
-	}//getAllMemo
+	}//_getAllMemo
 
 }
