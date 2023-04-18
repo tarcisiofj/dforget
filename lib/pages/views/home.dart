@@ -111,16 +111,11 @@ class _HomeState extends State<Home> {
 
 
 	void showMemoPage({MemoDTO? memo}) async{
-		print('chamaram showMemoPage');
-		print('vou imprimir valor de memo: $memo');
-		MemoDTO recMemo;
+		MemoDTO	recMemo = await push(context,MemoPage(memo:memo));
 		if(memo==null){
-			print('dentro do memo = null');
-				recMemo = await push(context,MemoPage(memo:memo));
 				if(recMemo!=null)
 					await memodmo.save(recMemo);
 		}else{
-				recMemo = await push(context,MemoPage(memo:memo));
 				if(recMemo!=null)
 					await memodmo.updateMemo(recMemo);
 		}
@@ -131,12 +126,13 @@ class _HomeState extends State<Home> {
 	//			} else {
 	//				await  memodmo.save(recMemo);
 	//			}	
-				//getAllMemo();
-				memodmo.getAllMemo().then( (list) {
-					setState( () {
-						memories = list;
-					});
-				});
+
+	 getAllMemo();
+//		memodmo.getAllMemo().then( (list) {
+//					setState( () {
+//						memories = list;
+//					});
+//				});
 			// } // if(recMemo)
   }
 
