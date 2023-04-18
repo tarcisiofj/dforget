@@ -15,7 +15,8 @@ class MyCard extends StatelessWidget {
 	late String titulo;
 	MemoDTO? memo;
 	MemoDMO memodmo = MemoDMO();
-	late final VoidCallback  showMemoPage;
+	late Function  showMemoPage;
+
  	MyCard.full(this.memo,this.showMemoPage);
 
   	@override
@@ -88,7 +89,9 @@ class MyCard extends StatelessWidget {
 
       		), // Card
 					onTap: () async {
-						showMemoPage(memo);	
+						print('imprimindo informacao no card no click, antes de chamar showMemoPage');
+						print(memo);
+						showMemoPage(memo: memo);	
 					//	 MemoDTO recMemo  = await  push(context,MemoPage(memo:memo));
 					//	 if(recMemo!=null){
 					//		if(memo!=null){

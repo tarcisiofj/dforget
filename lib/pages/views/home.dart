@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
 //		});
 		
  	//	memodao.deleteMemoAllReg();
-		_getAllMemo();
+		getAllMemo();
 	}
   
 	@override
@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
           child: ListView.builder(
            itemCount: memories.length,
 					 itemBuilder: (context, index){
-							return  MyCard.full(memories[index],showMemoPage(memoDTO));
+							return  MyCard.full(memories[index],showMemoPage);
 					
 					 } , 
 					),
@@ -111,16 +111,33 @@ class _HomeState extends State<Home> {
 
 
 	void showMemoPage({MemoDTO? memo}) async{
-			MemoDTO recMemo = await push(context,MemoPage());
-		//Future  recMemo = Navigator.of(context).pushNamed('/MemoPage', arguments:{'memo':memo});
-			if(recMemo!=null){
-				if(memo!=null){
+		print('chamaram showMemoPage');
+		print('vou imprimir valor de memo: $memo');
+		MemoDTO recMemo;
+		if(memo==null){
+			print('dentro do memo = null');
+				recMemo = await push(context,MemoPage(memo:memo));
+				if(recMemo!=null)
+					await memodmo.save(recMemo);
+		}else{
+				recMemo = await push(context,MemoPage(memo:memo));
+				if(recMemo!=null)
 					await memodmo.updateMemo(recMemo);
-				} else {
-					await  memodmo.save(recMemo);
-				}	
-				getAllMemo();
-			 } // if(recMemo)
+		}
+		//Future  recMemo = Navigator.of(context).pushNamed('/MemoPage', arguments:{'memo':memo});
+	//		if(recMemo!=null){
+	//			if(memo!=null){
+	//				await memodmo.updateMemo(recMemo);
+	//			} else {
+	//				await  memodmo.save(recMemo);
+	//			}	
+				//getAllMemo();
+				memodmo.getAllMemo().then( (list) {
+					setState( () {
+						memories = list;
+					});
+				});
+			// } // if(recMemo)
   }
 
 	void getAllMemo(){
