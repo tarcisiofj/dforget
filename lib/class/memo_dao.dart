@@ -159,30 +159,34 @@ class MemoDAO implements MemoIDAO{
 						print('temp mair revWeek');
 	        	if(temp.isAfter(DateTime.parse(memo.rev1month!))){
           		print('temp maior revMonth');
-        		} else {  //if revMonth
-         			if(temp.compareTo(DateTime.parse(memo.rev1month!))==0)
-            		memo.color!=ConstRevise;							 	
-         			else
+        		} else
+					 //	{  //if revMonth
+         		//	if(temp.compareTo(DateTime.parse(memo.rev1month!))==0)
+            	//	memo.color!=ConstRevise;							 	
+         		//	else
             		memo.color!= ConstOk;
-        		} //else revMonth
-      		} else{ // if revWeek
-         		if(temp.compareTo(DateTime.parse(memo.rev1week!))==0)
-            	memo.color!=ConstRevise;
-						else
+        		//} //else revMonth
+      		} else
+					//{ // if revWeek
+         		//if(temp.compareTo(DateTime.parse(memo.rev1week!))==0)
+            //	memo.color!=ConstRevise;
+					//	else
             	memo.color!= ConstOk;
-        	}// else revWeek
-    	} else {  // if rev24
-      	if(temp.compareTo(DateTime.parse(memo.rev24h!))==0)
-        	memo.color!=ConstRevise;
-      	else
+        	//}// else revWeek
+    	} else 
+			//{  // if rev24
+      	//if(temp.compareTo(DateTime.parse(memo.rev24h!))==0)
+        //	memo.color!=ConstRevise;
+      //	else
           memo.color!= ConstOk;
-    	}// else rev24
-  	} else { // if rev1h
-    	if(temp.compareTo(DateTime.parse(memo.rev1h!))==0)
-      	memo.color!= ConstRevise;
-    	else
+    	//}// else rev24
+  	} else 
+		//{ // if rev1h
+    	//if(temp.compareTo(DateTime.parse(memo.rev1h!))==0)
+      //	memo.color!= ;
+    //	else
       	memo.color!= ConstOk;
-  	} // else rev1h
+  	//} // else rev1h
 	return memo;
 	}
 

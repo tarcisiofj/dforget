@@ -7,7 +7,10 @@
   String? titleMain;
   String? subtitle;
   String? theme;
-	bool? statusView= true;
+	bool? viewRev1= false;
+	bool? viewRev24h= false;
+	bool? viewRev1w= false;
+	bool? viewRev1m= false;
   String? rev1h;
   //String? rev24h;
   //String? rev1week;
@@ -16,7 +19,7 @@
   int? color;
   String? listPdf;
 //  List<String>? listImg;
-
+	
 		
 	Memo.empty();	
 	
@@ -28,9 +31,10 @@
     this.subtitle,
     this.theme,
     this.rev1h,
-    //this.rev24h,
-    //this.rev1week,
-    //this.rev1month,
+		this.viewRev1,
+    this.viewRev24h,
+    this.viewRev1w,
+    this.viewRev1m,
     //this.revAll,
     this.color,
   //  this.listImg,
@@ -73,6 +77,17 @@
 		this.rev1h =rev1h;
 	}
 
+	bool? get getViewRev1 => viewRev1;
+  set setViewRev1(viewRev1) => this.viewRev1;
+
+	bool? get getViewRev1w => viewRev1w;
+  set setViewRev1w(viewRev1w) => this.viewRev1w;
+
+	bool? get getViewRev1m => viewRev1m;
+  set setViewRev1m(viewRev1m) => this.viewRev1m;
+
+	bool? get getViewRev24h => viewRev24h;
+  set setViewRev24h(viewRev24h) => this.viewRev24h;
 //	String? getListPdf(){
 //		return listPdf;
 //	}

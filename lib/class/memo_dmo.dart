@@ -21,10 +21,11 @@ class MemoDMO{
     DateTime todayPlus1h = today.add(Duration(hours:1));
 		memo.rev1h = 	todayPlus1h.toString(); 
 		memo.rev24h = todayPlus1h.add(Duration(hours: 24)).toString(); 
-		memo.rev1week = todayPlus1h.add(Duration(days: 7)).toString();
-		memo.rev1month = todayPlus1h.add(Duration(days: 30)).toString();
+		memo.rev1week = ((DateTime.parse(memo.rev24h!)).add(Duration(days:7))).toString();
+		memo.rev1month = ((DateTime.parse(memo.rev1week!)).add(Duration(days:30))).toString();
 		memo.revAll = ((DateTime.parse(memo.rev1month!)).add(Duration(days:60))).toString();
 		memo.color = ConstOk.value;
+		memo.
 		
 		try{
 		

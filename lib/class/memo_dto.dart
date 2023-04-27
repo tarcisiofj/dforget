@@ -16,6 +16,10 @@ const String memoriesTable = 'memories';
 			rev1weekCol,
 			rev1monthCol,
 			revAllCol,
+			viewRev1hCol,
+			viewRev24hCol,
+			viewRev1wCol,
+			viewRev1mCol,
 			colorCol,
 			listPdfCol,
 			listImgCol
@@ -30,6 +34,10 @@ const String memoriesTable = 'memories';
 		static const String rev1weekCol = "rev1week";
 		static const String rev1monthCol = "rev1month";
 		static const String revAllCol = "revAll";
+		static const String viewRev1hCol = "viewRev1";
+		static const String viewRev24hCol = "viewRev24h";
+		static const String viewRev1wCol = "viewRev1w";
+		static const String viewRev1mCol = "viewRev1m";
 		static const String colorCol = "color";
 		static const String listPdfCol = "listPdf";
 		static const String listImgCol = "listImg";
@@ -47,14 +55,21 @@ class MemoDTO extends Memo{
 
 
 	MemoDTO(
-			String rev24h,
+			String rev1h,
+
+			this.rev24h,
 			this.rev1week,
 			this.rev1month,
 			this.revAll,
+			
+			
+			bool viewRev1,
+			bool viewRev24h,
+			bool viewRev1w,
+			bool viewRev1m,
 			String titleMain,
 			String subtitle,
 			String theme,
-			String rev1h,
 			int color,
 			String listPdf,
 			List<String> listImg
@@ -63,6 +78,10 @@ class MemoDTO extends Memo{
 						subtitle,
 						theme,
 						rev1h,
+						viewRev1,
+						viewRev24h,
+						viewRev1w,
+						viewRev1m,
 						color = ConstOk.value,
 						listPdf,
 					//	listImg
@@ -81,6 +100,11 @@ MemoDTO.fromMap(Map map):	super.fromMap(){
 		 rev1month = map[MemoFields.rev1monthCol];
 		 revAll = map[MemoFields.revAllCol];
 		 rev1week = map[MemoFields.rev1weekCol];
+		 viewRev1 = map[MemoFields.viewRev1hCol];
+		 viewRev24h = map[MemoFields.viewRev24hCol];
+		 viewRev1w = map[MemoFields.viewRev1wCol];
+		 viewRev1m = map[MemoFields.viewRev1mCol];
+
 		 listPdf = map[MemoFields.listPdfCol];
 		// listImg = List<String>.from(map[MemoFields.listImgCol]);
   }
@@ -96,6 +120,11 @@ MemoDTO.fromMap(Map map):	super.fromMap(){
       MemoFields.rev1weekCol: rev1week,
       MemoFields.rev1monthCol: rev1month,
 			MemoFields.revAllCol: revAll,
+			MemoFields.viewRev1hCol: viewRev1,
+			MemoFields.viewRev24hCol: viewRev24h,
+			MemoFields.viewRev1wCol: viewRev1w,
+			MemoFields.viewRev1mCol: viewRev1m,
+
 			MemoFields.colorCol: color,
       MemoFields.listPdfCol: listPdf,
       //MemoFields.listImgCol: listImg,

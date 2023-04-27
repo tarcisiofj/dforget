@@ -86,10 +86,10 @@ class _HomeState extends State<Home> {
 	@override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const BarraPrincipal( tle:'Barra Principal'),
+      appBar: const BarraPrincipal( tle:'Dont Forget'),
       body: Center(
         child: Padding(
-					padding: const EdgeInsets.all(8.0),
+					padding: const EdgeInsets.fromLTRB(8,8,8,70),
           child: ListView.builder(
            itemCount: memories.length,
 					 itemBuilder: (context, index){

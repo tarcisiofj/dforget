@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 
 //CORES
-const MaterialColor ConstOk = Colors.green; // status ja fez revisao
-const MaterialColor ConstLate = Colors.red; // status passou do dia da Revisão
-const MaterialColor ConstRevise = Colors.orange; // status de fazer revisao agora
-//const MaterialColor ConstReviewed = Colors.blue; // 
+const MaterialColor ConstOk = Colors.green; // status ja fez revisao - OK
+const MaterialColor ConstLate = Colors.red; // status passou do dia da Revisão - NãoOK
+//nst MaterialColor ConstRevise = Colors.orange; // status de fazer revisao agora
+const MaterialColor ConstAllReviewed = Colors.blue; // já fez todas revisões
 
 // FIGURAS DA BARRA DE PROGRESSAO
 const String ConstRev1 = "images/bar_rev_1_nm2.png" ;
