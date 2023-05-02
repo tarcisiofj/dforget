@@ -10,6 +10,7 @@ const String memoriesTable = 'memories';
 			idCol,
 			titleMainCol,
 			subtitleCol,
+			dtCriacaoCol,
 			themeCol,
 			rev1hCol,
 			rev24hCol,
@@ -28,6 +29,7 @@ const String memoriesTable = 'memories';
 		static const String idCol= "id";
 		static const String titleMainCol = "titleMain";
 		static const String subtitleCol = "subtitle";
+		static const String dtCriacaoCol = "dtCriacao";
 		static const String themeCol = "theme";
 		static const String rev1hCol = "rev1h";
 		static const String rev24hCol = "rev24h";
@@ -46,7 +48,9 @@ const String memoriesTable = 'memories';
 
 class MemoDTO extends Memo{
 	
-  String? rev24h;
+  int? color;
+	String? rev1h;
+	String? rev24h;
   String? rev1week;
   String? rev1month;
   String? revAll;
@@ -55,14 +59,15 @@ class MemoDTO extends Memo{
 
 
 	MemoDTO(
-			String rev1h,
 
+			this.rev1h,
 			this.rev24h,
 			this.rev1week,
 			this.rev1month,
 			this.revAll,
+			this.color,		
 			
-			
+			String dtCriacao,
 			bool viewRev1,
 			bool viewRev24h,
 			bool viewRev1w,
@@ -70,19 +75,17 @@ class MemoDTO extends Memo{
 			String titleMain,
 			String subtitle,
 			String theme,
-			int color,
 			String listPdf,
 			List<String> listImg
 			):	super(
 						titleMain,
 						subtitle,
 						theme,
-						rev1h,
+						dtCriacao,
 						viewRev1,
 						viewRev24h,
 						viewRev1w,
 						viewRev1m,
-						color = ConstOk.value,
 						listPdf,
 					//	listImg
 						);
@@ -96,7 +99,9 @@ MemoDTO.fromMap(Map map):	super.fromMap(){
 		 subtitle = map[MemoFields.subtitleCol];
 		 theme = map[MemoFields.themeCol];
 		 color = map[MemoFields.colorCol];
-		 rev1h = map[MemoFields.rev1hCol]; rev24h = map[MemoFields.rev24hCol];
+		 dtCriacao = map[MemoFields.dtCriacaoCol];
+		 rev1h = map[MemoFields.rev1hCol]; 
+		 rev24h = map[MemoFields.rev24hCol];
 		 rev1month = map[MemoFields.rev1monthCol];
 		 revAll = map[MemoFields.revAllCol];
 		 rev1week = map[MemoFields.rev1weekCol];
@@ -115,6 +120,7 @@ MemoDTO.fromMap(Map map):	super.fromMap(){
 		  MemoFields.titleMainCol: titleMain, 
 	    MemoFields.subtitleCol: subtitle,
       MemoFields.themeCol: theme,
+			MemoFields.dtCriacaoCol: dtCriacao,
       MemoFields.rev1hCol: rev1h,
 	    MemoFields.rev24hCol:rev24h,
       MemoFields.rev1weekCol: rev1week,
@@ -134,6 +140,14 @@ MemoDTO.fromMap(Map map):	super.fromMap(){
 	 }
 	 return map;
 	}//toMap
+
+	int? get getColor{
+		return color;
+	}
+  set setColor(int color){
+		this.color =color;
+	}
+
 
 
 	String? get getRev24h{

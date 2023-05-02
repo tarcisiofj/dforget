@@ -11,12 +11,13 @@
 	bool? viewRev24h= false;
 	bool? viewRev1w= false;
 	bool? viewRev1m= false;
-  String? rev1h;
+	String? dtCriacao;
+  //String? rev1h;
   //String? rev24h;
   //String? rev1week;
   //String? rev1month;
   //String? revAll;
-  int? color;
+  //int? color;
   String? listPdf;
 //  List<String>? listImg;
 	
@@ -30,23 +31,23 @@
 		this.titleMain,
     this.subtitle,
     this.theme,
-    this.rev1h,
-		this.viewRev1,
+		this.dtCriacao,
+    this.viewRev1,
     this.viewRev24h,
     this.viewRev1w,
     this.viewRev1m,
     //this.revAll,
-    this.color,
+   // this.color,
   //  this.listImg,
     this.listPdf
   );
 
-	int? get getColor{
-		return color;
-	}	
-  set setColor(int color){
-		this.color = color;
-	}
+//	int? get getColor{
+//		return color;
+//	}	
+//  set setColor(int color){
+//		this.color = color;
+//	}
 	
 
 	String? get getTitleMain{
@@ -70,12 +71,20 @@
 		this.theme=theme;
 	}
 
-	String? get getRev1h{
-		return rev1h;
+//	String? get getRev1h{
+//		return rev1h;
+//	}
+//  set setRev1h(String rev1h){
+//		this.rev1h =rev1h;
+//	}
+
+	String? get getDtCriacao{
+		return dtCriacao;
 	}
-  set setRev1h(String rev1h){
-		this.rev1h =rev1h;
+  set setDtCriacao(String dtCriacao){
+		this.dtCriacao =dtCriacao;
 	}
+	
 
 	bool? get getViewRev1 => viewRev1;
   set setViewRev1(viewRev1) => this.viewRev1;
