@@ -76,7 +76,7 @@ class MemoDTO extends Memo{
 			String subtitle,
 			String theme,
 			String listPdf,
-			List<String> listImg
+			//List<String> listImg
 			):	super(
 						titleMain,
 						subtitle,
@@ -155,6 +155,13 @@ MemoDTO.fromMap(Map map):	super.fromMap(){
 	}
   set setRev24h(String rev24h){
 		this.rev24h =rev24h;
+	}
+
+	String? get getRev1h{
+		return rev1h;
+	}
+	set setRev1h(String rev1h){
+		this.rev1h;
 	}
 
 	String? get getRev1month{
